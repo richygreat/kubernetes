@@ -120,10 +120,10 @@ spec:
           - '/usr/sbin/td-agent 2>&1 >> /var/log/fluentd.log'
         resources:
           limits:
-            memory: 400Mi
+            memory: 200Mi
           requests:
-            cpu: 1000m
-            memory: 400Mi
+            cpu: 100m
+            memory: 200Mi
         volumeMounts:
         - name: varlog
           mountPath: /var/log
@@ -192,7 +192,7 @@ spec:
           limits:
             cpu: 1000m
           requests:
-            cpu: 1000m
+            cpu: 100m
         ports:
         - containerPort: 9200
           name: db
@@ -246,9 +246,9 @@ spec:
         resources:
           # keep request = limit to keep this container in guaranteed class
           limits:
-            cpu: 1000m
+            cpu: 100m
           requests:
-            cpu: 1000m
+            cpu: 100m
         env:
           - name: "ELASTICSEARCH_URL"
             value: "http://elasticsearch-logging:9200"
