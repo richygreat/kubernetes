@@ -92,6 +92,8 @@ spec:
         - name: elasticsearch-logging
           mountPath: /data
         env:
+        - name: ES_JAVA_OPTS
+          value: -Xms256m -Xmx256m
         - name: "NAMESPACE"
           valueFrom:
             fieldRef:
