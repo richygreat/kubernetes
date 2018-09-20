@@ -81,24 +81,6 @@ spec:                            # Holds specification of this resource
         requests:                     # Requests sent to the storage class
           storage: 20Gi                # Request to provision a volume of 1 GB
 ---
-apiVersion: v1               #API Version of the resource
-kind: Service                #Type of resource
-metadata:                    #Contains metadata of this resource.
-  name: elasticsearch        #Name of this resource
-  labels:                    #Additional identifier to put on pods
-    component: elasticsearch #puts component = elasticsearch
-spec:                        #Specifications of this resource
-  type: NodePort             #type of service
-  selector:                  #will distribute load on pods which
-    component: elasticsearch #have label `component = elasticsearch`
-  ports:                     #Port on which LoadBalancer will listen
-  - name: http               #Name given to port
-    port: 9200               #Port number
-    protocol: TCP            #Protocol supported
-  - name: transport          #Name given to port
-    port: 9300               #Port number
-    protocol: TCP            #Protocol supported
----
 
 apiVersion: extensions/v1beta1
 kind: DaemonSet
@@ -203,9 +185,10 @@ metadata:
     kubernetes.io/cluster-service: "true"
     kubernetes.io/name: "Kibana"
 spec:
+  type: NodePort
   ports:
   - port: 5601
     protocol: TCP
-    targetPort: ui
+    targetPort: 5601
   selector:
     k8s-app: kibana-logging
