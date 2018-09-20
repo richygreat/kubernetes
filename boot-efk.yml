@@ -204,6 +204,8 @@ spec:
         - name: es-persistent-storage
           mountPath: /data
         env:
+        - name: ES_HEAP_SIZE
+          value: "256m"
         - name: "NAMESPACE"
           valueFrom:
             fieldRef:
